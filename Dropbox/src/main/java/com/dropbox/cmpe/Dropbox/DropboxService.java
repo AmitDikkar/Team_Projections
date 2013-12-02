@@ -5,7 +5,13 @@ import com.dropbox.cmpe.Dropbox.api.resources.RootResource;
 import com.dropbox.cmpe.Dropbox.api.resources.UserResource;
 import com.dropbox.cmpe.Dropbox.config.ConfigElements;
 import com.dropbox.cmpe.Dropbox.config.DropboxServiceConfiguration;
+import com.dropbox.cmpe.Dropbox.domain.DatabaseDetails;
 import com.dropbox.cmpe.Dropbox.dto.MyMongo;
+import com.dropbox.cmpe.Dropbox.ui.resources.DeletedFileResource;
+import com.dropbox.cmpe.Dropbox.ui.resources.HomeResource;
+import com.dropbox.cmpe.Dropbox.ui.resources.LoginResource;
+import com.dropbox.cmpe.Dropbox.ui.resources.RegisterResource;
+import com.dropbox.cmpe.Dropbox.ui.resources.SharedFileResource;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.assets.AssetsBundle;
 import com.yammer.dropwizard.config.Bootstrap;
@@ -46,8 +52,14 @@ public class DropboxService extends Service<DropboxServiceConfiguration> {
 		// Added root resource - kept nothing as of now.
 		MyMongo myMongo = new MyMongo();
 		environment.addResource(RootResource.class);
+		DatabaseDetails databaseDetails=new DatabaseDetails();
 		// Added Document resource API to handle file uploading
 		environment.addResource(new DocumentResource(myMongo));
 		environment.addResource(new UserResource(myMongo));
+		environment.addResource(new LoginResource());
+    	environment.addResource(new HomeResource(myMongo,databaseDetails));
+    	environment.addResource(new DeletedFileResource(myMongo));
+    	environment.addResource(new SharedFileResource(myMongo));
+    	environment.addResource(new RegisterResource());
 	}
 }

@@ -283,6 +283,14 @@ public class MyMongo {
 				DatabaseDetails.class);
 		return dbDetails.getTrashListOfDates();
 	}
+	
+	public List<String> getSharedFileDates(String userName) {
+		// TODO Auto-generated method stub
+		String query = "{userName:'" + userName + "'}";
+		DatabaseDetails dbDetails = MyMongo.collection.findOne(query).as(
+				DatabaseDetails.class);
+		return dbDetails.getSharedFileDates();
+	}
 
 	public List<String> getFileDates(String userName) {
 		// TODO Auto-generated method stub
