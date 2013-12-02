@@ -1,4 +1,17 @@
 # HTTP-specific options.
+
+#These are details of amazon
+amazonTimeZone: "https://glacier.us-west-1.amazonaws.com/"
+amazonUsername: "AKIAIGAO6XZRPVYRW5NQ"
+amazonPassword: "HfLq+HKcH83NODmGtxYc/umd9JDP8j2Nq//vehf8"
+dbName: "dropbox"
+dbCollection: "dropdetails"
+databaseUsername: "teamprojections"
+databasePassword: "teamprojections"
+databaseAddress: "ds053788.mongolab.com"
+databasePort: 53788
+
+# HTTP-specific options.
 http:
   # Root Path http://{host}:{port}/xxx
   rootPath: /dropbox/*

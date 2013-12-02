@@ -3,37 +3,47 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
- <groupId>com.dropbox.cmpe</groupId>
-  <artifactId>Dropbox</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>Dropbox</name>
-  <url>http://maven.apache.org</url>
+	<groupId>com.dropbox.cmpe</groupId>
+	<artifactId>Dropbox</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>Dropbox</name>
+	<url>http://maven.apache.org</url>
 
-<properties>
+	<properties>
 		<dropwizard.version>0.6.2</dropwizard.version>
-</properties>
- 
-  
+	</properties>
+
+
 	<dependencies>
-	<dependency>
-       <groupId>com.amazonaws</groupId>
-       <artifactId>aws-java-sdk</artifactId>
-       <version>1.6.0</version>
-	</dependency>
-	<dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.yammer.dropwizard</groupId>
 			<artifactId>dropwizard-core</artifactId>
 			<version>${dropwizard.version}</version>
 		</dependency>
-	<dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jongo</groupId>
+			<artifactId>jongo</artifactId>
+			<version>0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.10.1</version>
+		</dependency>
 	</dependencies>
-<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
