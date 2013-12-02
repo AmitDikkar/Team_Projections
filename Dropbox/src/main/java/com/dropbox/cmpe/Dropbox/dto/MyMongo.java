@@ -349,7 +349,7 @@ public void recoverFile(String userName, String fileName){
 	}
 
 
-	public String registerUser(String userName, String password, String role){
+	public String registerUser(String userName, String password, String role,String emailid){
 		DatabaseDetails dbDetails = new DatabaseDetails();
 		if(isUserNameExist(userName) == false){
 			dbDetails.setUserName(userName);
@@ -361,6 +361,7 @@ public void recoverFile(String userName, String fileName){
 			dbDetails.setRole(role);
 		}
 		dbDetails.setPassword(password);
+		dbDetails.setEmailid(emailid);
 		insert(dbDetails);
 		return dbDetails.getUserName();
 	}

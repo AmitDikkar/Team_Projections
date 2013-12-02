@@ -43,7 +43,7 @@ public class UserResource {
 	@Timed(name = "new-user-new-vault")
 	public Response newUser(@Valid User newUser)
 	throws Exception {	
-	String newUserName = myMongo.registerUser(newUser.getUsername(), newUser.getPassword(), newUser.getRole());
+	String newUserName = myMongo.registerUser(newUser.getUsername(), newUser.getPassword(), newUser.getRole(),newUser.getEmailid());
 	System.out.println("Creating new vault for new user");
 	this.vaultName = myMongo.getVaultName(newUserName);
 	AmazonCommon common = new AmazonCommon();
@@ -52,6 +52,7 @@ public class UserResource {
 	CreateVaultResult vaultresult = common.createVault(this.vaultName, client);
 	if(newUserName!= newUser.getUsername()){
 		String responceMessage = "Your username will be : "+newUserName;
+		System.out.println(newUserName);
 	return Response
 			.status(200)
 			.entity(responceMessage)
