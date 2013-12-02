@@ -65,5 +65,31 @@ public class UserResource {
 				.build();
 	}
 }
+	
+	@POST
+	@Path("/olduser")
+	@Timed(name = "Login")
+	public Response loginUser(@Valid User newUser){
+		String existingUser = newUser.getUsername();
+		System.out.println("usename:"+newUser.getUsername());
+		System.out.println("password:"+newUser.getPassword());
+		if(myMongo.isUserNameExist(existingUser) == true){
+			if(myMongo.authenticateUser(newUser.getUsername(), newUser.getPassword())){
+				return Response.ok(200).build();
+			}
+			else{
+				return Response
+						.status(Response.Status.UNAUTHORIZED)
+						.entity("Please verify your username and password")
+						.build();
+			}
+		}
+		else{ 
+			return Response
+					.status(Response.Status.UNAUTHORIZED)
+					.entity("Sorry!! This username doesn't exists in our system. Please sign up as new user")
+					.build();
+		}
+	}
 
 }
