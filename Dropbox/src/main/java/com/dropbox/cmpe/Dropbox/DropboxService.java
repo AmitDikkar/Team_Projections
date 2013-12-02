@@ -7,8 +7,10 @@ import com.dropbox.cmpe.Dropbox.config.ConfigElements;
 import com.dropbox.cmpe.Dropbox.config.DropboxServiceConfiguration;
 import com.dropbox.cmpe.Dropbox.dto.MyMongo;
 import com.yammer.dropwizard.Service;
+import com.yammer.dropwizard.assets.AssetsBundle;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
+import com.yammer.dropwizard.views.ViewBundle;
 
 /**
  * CMPE 273 - Dropbox using amazon Glacier Author: Team Projections
@@ -23,6 +25,8 @@ public class DropboxService extends Service<DropboxServiceConfiguration> {
 	@Override
 	public void initialize(Bootstrap<DropboxServiceConfiguration> bootstrap) {
 		bootstrap.setName("dropbox-service");
+		bootstrap.addBundle(new ViewBundle());
+		bootstrap.addBundle(new AssetsBundle());
 	}
 
 	@Override
