@@ -566,4 +566,72 @@ public class DatabaseDetails {
 	public void setEmailid(String emailid) {
 		this.emailid = emailid;
 	}
+
+	public int getFileIndex(String fileName) {
+		int index = listOfFiles.indexOf(fileName);
+		return index;
+	}
+
+	/**
+	 * @param filePath
+	 *            add file path to the list
+	 */
+	public void addFilePath(int index, String filePath) {
+		filePaths.add(index, filePath);
+	}
+
+	/**
+	 * @param archiveId
+	 *            add archival id to the list
+	 */
+	public void addfileArichiveId(int index, String archiveId) {
+		fileArichiveId.add(index, archiveId);
+	}
+
+	/**
+	 * @param size
+	 *            add file size in the list
+	 */
+	public void addfileSize(int index, long size) {
+		fileSize.add(index, size);
+	}
+
+	public void addFileUploadingDate(int index, String string) {
+		listOfDate.add(index, string);
+	}
+
+	/**
+	 * @return the totalStorageLeft
+	 */
+	public long getTotalStorageLeft() {
+		return TotalStorageLeft;
+	}
+
+	/**
+	 * @param totalStorageLeft
+	 *            the totalStorageLeft to set
+	 */
+	public void setTotalStorageLeft(long totalStorageLeft) {
+		TotalStorageLeft = totalStorageLeft;
+	}
+
+	public int getSharedFileIndex(String fileName) {
+		return sharedFileNames.indexOf(fileName);
+	}
+
+	public void removeFromTrash(int index) {
+		trashCameFrom.remove(index);
+		trashFileArichiveIds.remove(index);
+		trashFileSizes.remove(index);
+		trashListOfDates.remove(index);
+		trashListOfFiles.remove(index);
+		trashVaultNames.remove(index);
+	}
+
+	public String getTrashFileArchiveIds(int index) {
+		return trashFileArichiveIds.get(index);
+	}
+	public long getTrashFileSize(int index){
+		return trashFileSizes.get(index);
+	}
 }

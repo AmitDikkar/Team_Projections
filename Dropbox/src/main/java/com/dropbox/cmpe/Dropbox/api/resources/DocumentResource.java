@@ -195,4 +195,131 @@ public class DocumentResource {
 					.entity("Sorry!!! Couldn't delete the file").build();
 		}
 	}
+
+	private String getFileNameFromPath(String filePath) {
+		// TODO Auto-generated method stub
+		String fileName=null;
+		String newstr=filePath;
+		String[] str=newstr.split("\\\\");
+		for (String string : str) {
+			fileName=string;
+			System.out.println(string);
+		}
+		System.out.println("update is "+fileName);
+		//compute the fileName
+		return(fileName);
+	}
+
+
+	private long getFileSize(String filePath) {
+		// TODO Auto-generated method stub
+		File file = new File(filePath);
+		long fileSize = file.length() / 1048786;
+		System.out.println("File size is+"+fileSize);
+		return fileSize;
+	}
+
+	@POST
+	@Path("/old/{existinguser}/upload")
+	@Timed(name="upload-file")
+	public Response uploadFile(@PathParam("existinguser") String existingUser, @QueryParam("filepath") String filePath) throws IOException
+	{
+		//to test
+		String vaultName;
+		System.out.println("Inside file upload method");
+		System.out.println("FilePath is : "+filePath);
+		//TODO: implement below two functions
+		String fileName = getFileNameFromPath(filePath);
+		long fileSize = getFileSize(filePath);
+		//String vaultName="myvault1";
+		//String filePathUpload=filePath;
+		/*
+		 * ensured that the file is on your classpath, then you should have everything correct.
+		 */
+		Boolean allow = myMongo.checkFileSizeToUpload(existingUser,fileSize);
+		
+		if(allow == true){
+			vaultName = myMongo.getVaultName(existingUser);
+			System.out.println("Vault Name is: "+vaultName);
+			AmazonCommon common = new AmazonCommon();
+			AWSCredentials credentials = common.getCredentials();
+			AmazonGlacierClient client = common.getClient(credentials);
+
+			//Create this vault only if user is new
+			//CreateVaultResult vaultresult = common.createVault(vaultName, client);
+
+			boolean result = uploadFileOnGlacier(existingUser,client,credentials,fileName, filePath,vaultName,fileSize);
+
+			if(result==true){
+				//Display message that file is uploaded
+				System.out.println("Operation Successful");
+				return Response.ok().build();
+			}
+			else{
+				//Display message that file is not uploaded
+				System.out.println("OPERATION UNSUCCESSFUL");
+				return Response
+						.status(Response.Status.BAD_REQUEST)
+						.entity("Sorry we couldn't upload your file")
+						.build();
+			}
+		}
+		else{
+			//return failure message: saying size is not available
+			return Response
+					.status(Response.Status.UNAUTHORIZED)
+					.entity("Sorry!!! this file has bigger size")
+					.build();
+		}
+	}
+
+//recover file from trash
+	@POST
+	@Path("/old/{existinguser}/trash/recover")
+	@Timed(name="delete-file-from-trash")
+	public Response recoverFileFromTrash(@PathParam("existinguser") String existingUser, @QueryParam("fileName") String fileName){
+		myMongo.recoverFile(existingUser, fileName);
+		return Response.status(200).build();
+	}
+	/**
+	 * @param client
+	 * @param credentials
+	 * @param filePathUpload
+	 * @param vaultName
+	 * @return true if successful,
+	 * false if unsuccessful
+	 */
+	
+	private boolean uploadFileOnGlacier(String existingUser, AmazonGlacierClient client, AWSCredentials credentials, String fileName, String filePathUpload, String vaultName, long fileSize){
+	
+		try {
+		
+			ArchiveTransferManager atm = new ArchiveTransferManager(client,credentials);
+			
+			System.out.println("in try");
+			System.out.println("File to be uploaded is "+filePathUpload);
+
+			UploadResult result1 = atm.upload(vaultName, filePathUpload, new File(filePathUpload));
+			
+			System.out.println(result1);
+			System.out.println("Archive ID: " + result1.getArchiveId());
+			if(result1.getArchiveId() != null){
+				myMongo.addNewFileDetails(existingUser, fileName, filePathUpload, result1.getArchiveId(), fileSize);
+				return true;
+			}
+			else{
+				return false;
+			}
+		} 
+		catch (Exception e) 
+		{
+			
+			System.out.println("in catch");
+			System.err.println(e);
+		
+			return false;
+		
+		}
+	}
+
 }

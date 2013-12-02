@@ -30,7 +30,15 @@ public class DropboxService extends Service<DropboxServiceConfiguration> {
 			Environment environment) throws Exception {
 
 		// Configuring elements in the static function
-
+		ConfigElements.setAmazonTimeZone(configuration.getAmazonTimeZone());
+    	ConfigElements.setAmazonUsername(configuration.getAmazonUsername());
+    	ConfigElements.setAmazonPassword(configuration.getAmazonPassword());
+    	ConfigElements.setDatabaseAddress(configuration.getDatabaseAddress());
+    	ConfigElements.setDatabasePassword(configuration.getDatabasePassword());
+    	ConfigElements.setDatabasePort(configuration.getDatabasePort());
+    	ConfigElements.setDatabaseUsername(configuration.getDatabaseUsername());
+    	ConfigElements.setDbCollection(configuration.getDbCollection());
+    	ConfigElements.setDbName(configuration.getDbName());
 		// Added root resource - kept nothing as of now.
 		MyMongo myMongo = new MyMongo();
 		environment.addResource(RootResource.class);

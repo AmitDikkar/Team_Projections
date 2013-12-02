@@ -4,6 +4,7 @@
 package com.dropbox.cmpe.Dropbox.dto;
 
 import java.net.UnknownHostException;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 
 /**
- * @author Amit
+ * @author Team projections
  * 
  */
 public class MyMongo {
@@ -289,5 +290,78 @@ public class MyMongo {
 		DatabaseDetails dbDetails = MyMongo.collection.findOne(query).as(
 				DatabaseDetails.class);
 		return dbDetails.getListOfDate();
+	}
+	public String getVaultName(String userName){
+		String query = "{userName:'"+userName+"'}";
+		String vaultName = MyMongo.collection.findOne(query).as(DatabaseDetails.class).getVaultName();
+		return (vaultName);
+	}
+
+	/**
+	 * @param userName
+	 * @param fileName
+	 * @param filePath
+	 * @param fileArchiveId
+	 * @param fileZize
+	 * This function will add new file details in the database
+	 * 1. Automatically update the StorageLeft
+	 * 2. add File name, File size archival ID, 
+	 */
+	public void addNewFileDetails(String userName, String fileName, String filePath, String fileArchiveId, long fileZize){
+		String query = "{userName:'"+userName+"'}";
+		DatabaseDetails dbDetails = MyMongo.collection.findOne(query).as(DatabaseDetails.class);
+		dbDetails.addFile(fileName);
+		int index = dbDetails.getFileIndex(fileName);
+		dbDetails.addFilePath(index, filePath);
+		dbDetails.addfileArichiveId(index, fileArchiveId);
+		dbDetails.addfileSize(index, fileZize);
+		dbDetails.addFileUploadingDate(index, new Date().toGMTString());
+		dbDetails.setTotalStorageLeft(dbDetails.getTotalStorageLeft() - fileZize);
+		collection.update(query).merge(dbDetails);
+		System.out.println("updated fields");
+	}
+
+public void recoverFile(String userName, String fileName){
+		System.out.println("Inside Move to trash");
+		String query = "{userName:'"+userName+"'}";
+		DatabaseDetails dbDetails = MyMongo.collection.findOne(query).as(DatabaseDetails.class);
+		
+		int trashIndex = dbDetails.getTrashFileIndex(fileName);
+		
+		if(dbDetails.getTrashCameFrom(trashIndex).equalsIgnoreCase("N")){  // copy file details to normal file list
+			dbDetails.addFile(fileName);
+			int fileIndex = dbDetails.getFileIndex(fileName);
+			dbDetails.addfileArichiveId(fileIndex, dbDetails.getTrashFileArchiveIds(trashIndex));
+			dbDetails.addfileSize(fileIndex, dbDetails.getTrashFileSize(trashIndex));
+			dbDetails.addFileUploadingDate(fileIndex, new Date().toGMTString());
+			long fileSize = dbDetails.getTrashFileSize(trashIndex);
+			dbDetails.setTotalStorageLeft(dbDetails.getTotalStorageLeft() - fileSize);
+		}
+		else{ // copy file details to shared File list
+			dbDetails.addSharedFileName(fileName);
+			int sharedFileIndex = dbDetails.getSharedFileIndex(fileName);
+			dbDetails.addSharedArchiveId(sharedFileIndex, dbDetails.getTrashFileArchiveIds(trashIndex));
+			dbDetails.addSharedFileSize(sharedFileIndex, dbDetails.getTrashFileSize(trashIndex));
+			dbDetails.addSharedFileDates(sharedFileIndex, new Date().toGMTString());
+		}
+		dbDetails.removeFromTrash(trashIndex);
+		collection.update(query).merge(dbDetails);
+	}
+
+
+	public String registerUser(String userName, String password, String role){
+		DatabaseDetails dbDetails = new DatabaseDetails();
+		if(isUserNameExist(userName) == false){
+			dbDetails.setUserName(userName);
+			dbDetails.setRole(role);
+		}
+		else{
+			System.out.println("This is existing username");
+			dbDetails.setUserNameWithNewVaultName(userName); //Created unique username and vaultname also
+			dbDetails.setRole(role);
+		}
+		dbDetails.setPassword(password);
+		insert(dbDetails);
+		return dbDetails.getUserName();
 	}
 }
