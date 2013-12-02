@@ -18,6 +18,8 @@ import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.views.ViewBundle;
 
+import de.spinscale.dropwizard.jobs.JobsBundle;
+
 /**
  * CMPE 273 - Dropbox using amazon Glacier Author: Team Projections
  * 
@@ -33,6 +35,7 @@ public class DropboxService extends Service<DropboxServiceConfiguration> {
 		bootstrap.setName("dropbox-service");
 		bootstrap.addBundle(new ViewBundle());
 		bootstrap.addBundle(new AssetsBundle());
+		bootstrap.addBundle(new JobsBundle("com.dropbox.cmpe.Dropbox"));
 	}
 
 	@Override
