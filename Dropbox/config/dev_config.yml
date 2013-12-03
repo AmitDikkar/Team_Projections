@@ -2,8 +2,8 @@
 
 #These are details of amazon
 amazonTimeZone: "https://glacier.us-west-1.amazonaws.com/"
-amazonUsername: "AKIAJY5MON7GKY3ASXKA"
-amazonPassword: "F2cTU/wftw3tFEvEYBLXnup7973YIWIO4opvJQFw"
+amazonUsername: "AKIAIGAO6XZRPVYRW5NQ"
+amazonPassword: "HfLq+HKcH83NODmGtxYc/umd9JDP8j2Nq//vehf8"
 dbName: "dropbox"
 dbCollection: "dropdetails"
 databaseUsername: "teamprojections"
