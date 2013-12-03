@@ -61,8 +61,8 @@ public class UserResource {
 		AmazonCommon common = new AmazonCommon();
 		AWSCredentials credentials = common.getCredentials();
 		AmazonGlacierClient client = common.getClient(credentials);
-		//CreateVaultResult vaultresult = common.createVault(this.vaultName,
-			//	client);
+		CreateVaultResult vaultresult = common.createVault(this.vaultName,
+				client);
 		if (newUserName != newUser.getUsername()) {
 			String responceMessage = "Your username will be : " + newUserName;
 			System.out.println(newUserName);

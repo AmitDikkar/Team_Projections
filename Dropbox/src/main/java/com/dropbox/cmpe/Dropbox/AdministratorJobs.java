@@ -17,7 +17,7 @@ import com.dropbox.cmpe.Dropbox.domain.AmazonCommon;
 import de.spinscale.dropwizard.jobs.Job;
 import de.spinscale.dropwizard.jobs.annotations.Every;
 
-@Every("0 0 12 ? * FRI,SAT,SUN")
+@Every("5760mn")
 public class AdministratorJobs extends Job {
 
 	static int i = 0;
@@ -40,7 +40,6 @@ public class AdministratorJobs extends Job {
 			FileWriter fileWritter = new FileWriter(newfile.getAbsoluteFile());
 			br = new BufferedWriter(fileWritter);
 			br.write(date.toGMTString());
-			br.write("\nsjdaj");
 			br.write("hello file " + i + " data");
 
 			AmazonCommon common = new AmazonCommon();
