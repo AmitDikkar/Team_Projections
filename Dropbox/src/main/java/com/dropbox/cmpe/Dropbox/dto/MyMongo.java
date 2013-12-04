@@ -283,6 +283,14 @@ public class MyMongo {
 				DatabaseDetails.class);
 		return dbDetails.getTrashListOfDates();
 	}
+	
+	public List<String> getSharedFileDates(String userName) {
+		// TODO Auto-generated method stub
+		String query = "{userName:'" + userName + "'}";
+		DatabaseDetails dbDetails = MyMongo.collection.findOne(query).as(
+				DatabaseDetails.class);
+		return dbDetails.getSharedFileDates();
+	}
 
 	public List<String> getFileDates(String userName) {
 		// TODO Auto-generated method stub
@@ -349,7 +357,7 @@ public void recoverFile(String userName, String fileName){
 	}
 
 
-	public String registerUser(String userName, String password, String role){
+	public String registerUser(String userName, String password, String role,String emailid){
 		DatabaseDetails dbDetails = new DatabaseDetails();
 		if(isUserNameExist(userName) == false){
 			dbDetails.setUserName(userName);
@@ -361,6 +369,7 @@ public void recoverFile(String userName, String fileName){
 			dbDetails.setRole(role);
 		}
 		dbDetails.setPassword(password);
+		dbDetails.setEmailid(emailid);
 		insert(dbDetails);
 		return dbDetails.getUserName();
 	}

@@ -36,7 +36,7 @@ public class SharedFileResource  {
 		// Auto-generated method stub
 		ArrayList<FilesForMustach> listOfFiles = new ArrayList<FilesForMustach>();
 		List<String> files = mymongo.getSharedFileNames(username);
-		//List<String> dates =  mymongo.getSharegetTrashFileDates(username);
+		List<String> dates =  mymongo.getSharedFileDates(username);
 		int index=0;
 		for(String file: files){
 			FilesForMustach element = new FilesForMustach();
@@ -45,11 +45,11 @@ public class SharedFileResource  {
 			index++;		
 		}
 		index=0;
-		/*int index1=0;
+		int index1=0;
 		for(String date: dates){
 			listOfFiles.get(index1).setDate(date);
 			index1++;
-			}*/
+			}
 		return listOfFiles;
 	}
 }
