@@ -48,7 +48,7 @@
       
            <form class="navbar-form navbar-right" id="loginform" action="dropbox" method="post">
             <div class="form-group">
-             <input type="text" placeholder="Email" name="username" class="form-control" id="uname" required autofocus>
+             <input type="text" placeholder="Username" name="username" class="form-control" id="uname" required autofocus>
             </div>
             
             <div class="form-group">
@@ -67,9 +67,10 @@
       <div class="container">
       <br/>
         <h1>Welcome to Amazon Glacier</h1>
-         <p>Amazon Glacier is an online file storage web service that provides reliable storage for data archiving and backup. Glacier is part of the Amazon Web Services suite of cloud computing services, and is designed for long-term storage of data that is infrequently accessed and for which retrieval latency times of 4 to 6 hours are acceptable.</p>
-        <p><a class="btn btn-primary btn-lg" role="button" href="http://en.wikipedia.org/wiki/Amazon_Glacier">Learn more &raquo;</a>
+         <p>Amazon Glacier is an online file storage web service that provides reliable storage for data archiving and backup. Glacier is part of the Amazon Web Services suite of cloud computing services, and is designed for long-term storage of data that is infrequently accessed and for which retrieval latency times of 3 to 5 hours are acceptable.</p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://slid.es/maulikfojdar/glacier-storage">Documentation &raquo;</a>
         <a class="btn btn-primary btn-lg" role="button" href="/dropbox/register">Register &raquo;</a></p>
+         
       </div>
     </div>
 
@@ -77,26 +78,26 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Storage</h2>
-          <p>Glacier runs on "inexpensive commodity hardware components," which are suggested to be high numbers of high-capacity low-cost hard disks. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>Getting Started</h2>
+          <p>Welcome to the Amazon Glacier Developer Guide. Amazon Glacier is a storage service optimized for infrequently used data, or "cold data." </p>
+          <p><a class="btn btn-default" href="http://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>Pricing</h2>
           <p>Uploading data to Glacier is free, but downloading data from Glacier may be charged. Data transfer to the EC2 cloud in the same region is free, while data transfer between AWS regions is charged with $0.02 per GB </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="http://aws.amazon.com/glacier/pricing/" role="button">View details &raquo;</a></p>
        </div>
         <div class="col-md-4">
           <h2>Features</h2>
           <p>Glacier is up to 90% cheaper than AWS S3, which in the past was the only way of archiving on the AWS cloud. Amazon hopes this new service will move businesses from on-premises tape backup drives to cloud-based backup storage.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="http://aws.amazon.com/glacier/#highlights" role="button">View details &raquo;</a></p>
         </div>
       </div>
 
       <hr>
 
       <footer>
-        <p>Projections &copy; Company 2013</p>
+        <p> &copy;2013, Projections, Inc.</p>
       </footer>
       
       <!-- Modal -->
@@ -160,6 +161,8 @@ $(function() {
             window.location="/dropbox/home/"+user+"/listoffiles";
    	},
    	error: function() {
+   			alert("Invalid username or password. Try Again");
+   			document.getElementById('uname').value = "";
             window.location.reload();
    	}
 });

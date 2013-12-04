@@ -71,7 +71,6 @@
           	  <thead>
             	<tr style="background-color:#428bca;color:#fff;">
             		<th>Name</th>
-            		<th>Date</th>
             		<th>Download</th>
             		<th>Delete</th>
             	</tr>
@@ -80,7 +79,6 @@
             {{#listOfFiles}}
             	<tr>
             		<td>{{file}}</td>
-            		<td>{{date}}</td>
             		<td><button class="btn btn-success" name="download">Download</button></td>
             		<td><button class="btn btn-danger" name="delete">Delete</button></td>
             	</tr>
@@ -164,7 +162,7 @@
 	        
         	if(button_pressed=="delete"){
         	var uri = "/dropbox/v1/documents/old/"+existinguser+"/share/delete?fileName="+tag;
-        	      
+        	 alert("Your file has been deleted but you can still recover it later!");      
        		$.ajax({
                  url: uri,
                  type: 'DELETE',
@@ -184,7 +182,7 @@
              if(button_pressed=="download"){
             
         	var uri = "/dropbox/v1/documents/old/"+existinguser+"/share/download?filePath=D:/"+tag+".zip&fileName="+tag;
-        	
+        	alert("Please be patient! Your file will be downloaded after 4 hours. Thank you!");
        		 $.ajax({
             	      url: uri,
                 	  type: 'GET',

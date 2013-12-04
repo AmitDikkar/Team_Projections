@@ -82,7 +82,7 @@
             		<td>{{file}}</td>
             		<td>{{date}}</td>
             		<td><button class="btn btn-success" name="download">Recover</button></td>
-            		<td><button class="btn btn-danger" name="delete">Delete</button></td>
+            		<td><button class="btn btn-danger" name="delete" title="Clicking this permanently deletes your file.">Delete</button></td>
             	</tr>
             {{/listOfFiles}}
             
@@ -162,7 +162,8 @@
              if(button_pressed=="download"){
             
         	var uri = "/dropbox/v1/documents/old/"+existinguser+"/trash/recover?filepath=D:/"+tag+".zip&fileName="+tag;
-        	     
+        	
+        	 alert("Your file has been recovered and is available in the Home Section!");    
        		 $.ajax({
             	      url: uri,
                 	  type: 'POST',

@@ -1,6 +1,7 @@
 package com.dropbox.cmpe.Dropbox;
 
 import com.dropbox.cmpe.Dropbox.api.resources.DocumentResource;
+
 import com.dropbox.cmpe.Dropbox.api.resources.RootResource;
 import com.dropbox.cmpe.Dropbox.api.resources.UserResource;
 import com.dropbox.cmpe.Dropbox.config.ConfigElements;
@@ -17,7 +18,6 @@ import com.yammer.dropwizard.assets.AssetsBundle;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.views.ViewBundle;
-
 import de.spinscale.dropwizard.jobs.JobsBundle;
 
 /**
