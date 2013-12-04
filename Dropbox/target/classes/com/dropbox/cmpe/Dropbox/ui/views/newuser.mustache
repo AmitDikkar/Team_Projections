@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="ico/favicon.png">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+
+      <form class="form-signin">
+		<h3 style="text-align:center"> Register to Projections</h3>      
+
+	 			  <input type="text" class="form-control" placeholder="Email" name="emailid" id="email" >	
+	 
+	              <input type="text" class="form-control" placeholder="Username" name="username" id="uword" >
+    
+    	          <input type="password" class="form-control" placeholder="Password" name="password"  id="pword">
+    
+              	  <input type="text" class="form-control" placeholder="manager/engineer" name="role" id="role" >
+              	  <br/>
+    
+          	   	  <input id="login" class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
+    
+      </form>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    
+       <script type="text/javascript">
+        
+         $(document).ready(function(){
+        $.fn.serializeObject = function()
+	{
+    	var o = {};
+    	var a = this.serializeArray();
+    	$.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
+$(function() {
+    $("form").submit(function() {
+        var serializedData= (JSON.stringify($('form').serializeObject()));
+        
+       	  $.ajax({
+	    		type: "POST",
+	    		url: '/dropbox/v1/users/newuser',
+	    		contentType: "application/json",
+	    		data:serializedData,
+	    		success: function() {
+            		window.location = '/dropbox';
+	    		},
+	    		error: function() {
+					window.location='/dropbox';
+   				}
+		});
+        return false;
+    });
+});
+});
+</script>   
+</body>
+</html>

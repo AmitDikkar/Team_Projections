@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="#">
+
+    <title>Glacier Storage</title>
+
+    <!-- Bootstrap core CSS -->
+   
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" media="screen">
+
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+  </head>
+ 
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Projections</a>
+        </div>
+        <div class="navbar-collapse collapse">
+ 
+      
+           <form class="navbar-form navbar-right" id="loginform" action="dropbox" method="post">
+            <div class="form-group">
+             <input type="text" placeholder="Email" name="username" class="form-control" id="uname" required autofocus>
+            </div>
+            
+            <div class="form-group">
+             <input type="password" name="password" placeholder="Password" class="form-control" id="pword" required autofocus>
+            </div>
+
+             <input id="login" type="submit" value="Sign in" class="btn btn-success"   style="margin-right: 30px">
+          </form>
+          <label id="idMessage" style="color:red"></label>  
+          
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+      <br/>
+        <h1>Welcome to Amazon Glacier</h1>
+         <p>Amazon Glacier is an online file storage web service that provides reliable storage for data archiving and backup. Glacier is part of the Amazon Web Services suite of cloud computing services, and is designed for long-term storage of data that is infrequently accessed and for which retrieval latency times of 4 to 6 hours are acceptable.</p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://en.wikipedia.org/wiki/Amazon_Glacier">Learn more &raquo;</a>
+        <a class="btn btn-primary btn-lg" role="button" href="/dropbox/register">Register &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Storage</h2>
+          <p>Glacier runs on "inexpensive commodity hardware components," which are suggested to be high numbers of high-capacity low-cost hard disks. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Pricing</h2>
+          <p>Uploading data to Glacier is free, but downloading data from Glacier may be charged. Data transfer to the EC2 cloud in the same region is free, while data transfer between AWS regions is charged with $0.02 per GB </p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Features</h2>
+          <p>Glacier is up to 90% cheaper than AWS S3, which in the past was the only way of archiving on the AWS cloud. Amazon hopes this new service will move businesses from on-premises tape backup drives to cloud-based backup storage.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>Projections &copy; Company 2013</p>
+      </footer>
+      
+      <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:150px">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Registration Form</h4>
+      </div>
+     
+     <div class="modal-body">
+     
+      <br/>
+        <br/>
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+      
+    </div> <!-- /container -->
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    
+       <script type="text/javascript">
+       
+         $(document).ready(function(){
+        $.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
+$(function() {
+    $('form').submit(function() {
+     var user = document.getElementById('uname').value;
+        var serializedData= (JSON.stringify($('form').serializeObject()));
+       // alert(serializedData);
+        
+       	 $.ajax({
+   	type: "POST",
+   	url: '/dropbox/v1/users/olduser',
+   	contentType: "application/json",
+   	data:serializedData,
+   	success: function() {
+            window.location="/dropbox/home/"+user+"/listoffiles";
+   	},
+   	error: function() {
+            window.location.reload();
+   	}
+});
+        return false;
+    });
+});
+});
+</script>   
+ </body>
+</html>
