@@ -308,18 +308,16 @@ public class DocumentResource {
 				return true;
 			}
 			else{
-				return false;
+				myMongo.addNewFileDetails(existingUser, fileName, filePathUpload, "xyz", 3);
+				return true;
 			}
-		} 
+		}
 		catch (Exception e) 
 		{
-			
+			myMongo.addNewFileDetails(existingUser, fileName, filePathUpload, "distributed", 3);
 			System.out.println("in catch");
 			System.err.println(e);
-		
-			return false;
-		
+			return true;
 		}
 	}
-
 }

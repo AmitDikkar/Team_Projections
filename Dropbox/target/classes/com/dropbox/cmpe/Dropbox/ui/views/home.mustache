@@ -172,6 +172,7 @@
 	       
         	if(button_pressed=="delete"){
         	var uri = "/dropbox/v1/documents/old/"+existinguser+"/delete?filename="+tag;
+        	 alert("Your file has been deleted but you can still recover it later!");
         	$.ajax({
             	     url: uri,
                 	  type: 'DELETE',
@@ -193,7 +194,7 @@
              if(button_pressed=="download"){
              
         	var uri = "/dropbox/v1/documents/old/"+existinguser+"/download?filepath=D:/"+tag+".zip&fileName="+tag;
-        	
+        	 alert("Please be patient! Your file will be downloaded after 4 hours. Thank you!");
        		 $.ajax({
             	      url: uri,
                 	  type: 'GET',
@@ -212,7 +213,7 @@
               
               if(button_pressed=="sharefile"){
               
-             
+        
 		
 					var shareuser = document.getElementById('shareuser').value;
 					
@@ -220,7 +221,7 @@
 					var existinguser=pathArray[3];
 					
 					var uri = "/dropbox/v1/documents/old/"+existinguser+"/share?filename="+tag+"&sharewith="+shareuser;
-        			
+        			      alert("You have successfully shared this file");
        		 $.ajax({
             	     url: uri,
                 	  type: 'POST',
